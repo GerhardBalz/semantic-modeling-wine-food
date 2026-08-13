@@ -21,6 +21,8 @@ Reference document:
 https://www.w3.org/TR/2004/REC-owl-guide-20040210/
 ```
 
-The W3C material is external to this repository. This bootstrap does not copy or redistribute the Wine/Food ontology source files.
+The W3C material is external to this repository. The repository does not copy or redistribute the Wine/Food ontology source files.
 
 Before any future cached or preserved copy is committed, the applicable W3C licensing terms for those source artifacts must be identified and recorded explicitly. Repository URLs or local files must not be presented as replacement semantic identities for the historical W3C namespaces.
+
+Public repository visibility, if adopted through SKE governance, must not be interpreted as W3C endorsement or as a claim of authority over those historical namespaces.
