@@ -1,10 +1,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix smo: <https://w3id.org/smo#> .
+@prefix mod: <https://w3id.org/mod#> .
 @prefix smwf: <https://w3id.org/semantic-modeling-wine-food/> .
 
 smwf:MealCourseWineRecommendationModel
@@ -13,14 +12,8 @@ smwf:MealCourseWineRecommendationModel
     dcterms:description "A bounded purpose-specific semantic model that recommends candidate wines from explicit meal-course and preference facts while preserving lineage to the historical W3C Wine and Food semantic models."@en ;
     dcterms:source smwf:W3COwlGuideWine, smwf:W3COwlGuideFood ;
     prov:wasDerivedFrom smwf:W3COwlGuideWine, smwf:W3COwlGuideFood ;
-    smwf:answersQuestion smwf:MealCourseRecommendationQuestion .
+    mod:competencyQuestion "Which candidate wines match this meal course and preference profile?"@en .
 
-smwf:MealCourseRecommendationQuestion
-    a smwf:CompetencyQuestion ;
-    rdfs:label "Which candidate wines match this meal course and preference profile?"@en .
-
-smwf:CompetencyQuestion a owl:Class .
-smwf:answersQuestion a owl:ObjectProperty .
 smwf:suitableForCourse a owl:ObjectProperty .
 smwf:hasBody a owl:DatatypeProperty .
 smwf:preferredBody a owl:DatatypeProperty .
