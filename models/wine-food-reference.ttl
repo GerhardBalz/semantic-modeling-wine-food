@@ -1,0 +1,23 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix smo: <https://w3id.org/smo#> .
+@prefix smwf: <https://w3id.org/semantic-modeling-wine-food/> .
+
+smwf:W3COwlGuideWine
+    a smo:SemanticModel ;
+    dcterms:title "W3C OWL Guide Wine semantic model"@en ;
+    dcterms:identifier <http://www.w3.org/TR/2004/REC-owl-guide-20040210/wine#> ;
+    dcterms:source <https://www.w3.org/TR/2004/REC-owl-guide-20040210/> .
+
+smwf:W3COwlGuideFood
+    a smo:SemanticModel ;
+    dcterms:title "W3C OWL Guide Food semantic model"@en ;
+    dcterms:identifier <http://www.w3.org/TR/2004/REC-owl-guide-20040210/food#> ;
+    dcterms:source <https://www.w3.org/TR/2004/REC-owl-guide-20040210/> .
+
+smwf:WineFoodPairingReferenceModel
+    a smo:SemanticModel ;
+    dcterms:title "Wine/Food Pairing Reference Model"@en ;
+    dcterms:description "Purpose-specific SKE reference model for exploring wine-for-meal-course recommendation semantics while preserving traceability to the historical W3C Wine and Food models."@en ;
+    dcterms:source smwf:W3COwlGuideWine, smwf:W3COwlGuideFood ;
+    prov:wasDerivedFrom smwf:W3COwlGuideWine, smwf:W3COwlGuideFood .
