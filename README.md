@@ -2,17 +2,17 @@
 
 A Semantic Knowledge Engineering (SKE) reference example for applying the Semantic Modeling Ontology (SMO) to the classic W3C OWL Wine and Food teaching domain.
 
-> **Status:** Bootstrap reference baseline. The repository is intentionally private while the first modeling and provenance baseline is reviewed. Visibility is a governance decision, not a measure of semantic maturity.
+> **Status:** Public-readiness baseline complete. Repository visibility is governed through SKE #29; visibility is a publication/governance decision, not a measure of semantic maturity.
 
 ## Role in SKE
 
-This repository is a **Semantic Modeling reference example**.
+This repository is the sibling semantic-modeling reference example to [Semantic Modeling Pizza](https://github.com/GerhardBalz/semantic-modeling-pizza).
 
 Related repositories:
 
 - [Semantic Knowledge Engineering](https://github.com/GerhardBalz/semantic-knowledge-engineering) — initiative architecture and cross-repository governance;
-- [Semantic Modeling Ontology](https://github.com/GerhardBalz/semantic-modeling-ontology) — owner of reusable semantic-modeling vocabulary;
-- [Semantic Modeling Pizza](https://github.com/GerhardBalz/semantic-modeling-pizza) — sibling reference example;
+- [Semantic Modeling Ontology](https://github.com/GerhardBalz/semantic-modeling-ontology) — reusable semantic-modeling vocabulary;
+- [Semantic Modeling Pizza](https://github.com/GerhardBalz/semantic-modeling-pizza) — first reference example and comparison domain;
 - [Pizza Ontology](https://github.com/GerhardBalz/pizza-ontology) — separate preservation/reference proving ground.
 
 This repository does **not** claim authority over the historical W3C Wine or Food namespaces and does not define a successor Wine ontology.
@@ -32,30 +32,52 @@ Guide
 https://www.w3.org/TR/2004/REC-owl-guide-20040210/
 ```
 
-The guide describes Wine and Food as an interconnected OWL DL example and uses them to illustrate reasoning about wines, foods, meal courses, grapes, regions and wine recommendations.
+The repository references this material but does not redistribute the original ontology source files. [`NOTICE.md`](NOTICE.md) and [`source/README.md`](source/README.md) record the authority, provenance, and licensing boundary.
 
-No ontology source file is copied into this bootstrap. `source/README.md` records the provenance and licensing boundary that must be resolved before introducing any local cached representation.
-
-## First modeling question
-
-The first reference question is deliberately close to the original OWL Guide use case:
-
-> How can a purpose-specific Wine/Food semantic model retain traceability to the historical Wine and Food semantic models while supporting a wine-for-meal-course recommendation use case without claiming ownership of the source vocabularies?
-
-## Reference chain
+## Reference architecture
 
 ```text
-W3C OWL Guide Wine semantic model ─┐
-                                   ├─ described as SMO semantic models
-W3C OWL Guide Food semantic model ─┘
-                 ↓ source of
-Wine/Food Pairing Reference Model
-        smo:SemanticModel
-                 ↓ exercised by
-pairing-oriented query / validation examples
+W3C Wine semantic model ───────────┐
+                                   ├─ source of
+W3C Food semantic model ───────────┘
+                    Wine/Food Pairing Reference Model
+                            smo:SemanticModel
+                                   ↓ refined into
+                    Meal-course Recommendation Model
+                            smo:SemanticModel
+                                   ↓ exercised by
+                    deterministic SPARQL recommendation
 ```
 
-The bootstrap intentionally uses only the published SMO class `smo:SemanticModel`. It does not invent new SMO properties for relationships that are not yet part of the governed vocabulary.
+Both local semantic models retain explicit lineage to the historical W3C sources without claiming their namespaces.
+
+## Executable recommendation evidence
+
+The repository implements a bounded recommendation question:
+
+> Which candidate wines match this meal course and preference profile?
+
+The textual competency question uses MOD `mod:competencyQuestion`, following the standards-first decision in SMO #22 / PR #23.
+
+A deterministic SPARQL query selects the single candidate matching the example request. The tests also verify:
+
+- lineage to both historical Wine and Food semantic models;
+- no `smo:ImplementationProjection` claim;
+- no explicit exclusion relation;
+- no need for the earlier local first-class competency-question resource.
+
+The last point is intentional negative evidence: the resource was removed because the current example demonstrated no additional identity/provenance value beyond the MOD textual property.
+
+## Vocabulary boundary
+
+The example uses:
+
+- governed `smo:SemanticModel` for semantic models;
+- DCTERMS and PROV-O for metadata and lineage;
+- MOD `mod:competencyQuestion` for the textual competency question;
+- local `smwf:` terms for example-specific recommendation concepts.
+
+No new SMO competency-question term was introduced.
 
 ## Repository structure
 
@@ -72,33 +94,44 @@ The bootstrap intentionally uses only the published SMO class `smo:SemanticModel
 │   └── README.md
 ├── models/
 │   └── wine-food-reference.ttl
+├── examples/
+│   └── meal-course-wine-recommendation.ttl
 └── tests/
-    └── test_reference_model.py
+    ├── test_reference_model.py
+    └── test_recommendation.py
 ```
-
-Additional directories such as `examples/`, `queries/`, `shapes/` or `data/` should be added only when an executable example justifies them.
 
 ## Validation
 
-Install the single development dependency and run:
+Run the deterministic, network-independent validation suite:
 
 ```bash
 python -m pip install -r requirements-dev.txt
 python -m unittest discover -s tests -v
 ```
 
-The test parses the Turtle model and checks the minimum semantic and provenance contract deterministically without network access.
+The tests preserve historical identifiers, verify dual-source lineage, execute the recommendation query, require MOD competency-question metadata, and protect the negative `ImplementationProjection` boundary.
+
+## Cross-example findings
+
+The Pizza ↔ Wine/Food comparison produced these outcomes:
+
+- competency-question semantics recur → reuse MOD, not SMO expansion;
+- multiple-source lineage → DCTERMS/PROV-O are sufficient;
+- explicit exclusions did not recur → no reusable exclusion term justified;
+- no `smo:ImplementationProjection` was needed here;
+- operation signatures and recommendation-evidence structures did not independently recur at the reusable semantic-modeling layer.
+
+These results are governed in SKE rather than silently generalized here.
 
 ## Licensing and attribution
 
 Original repository-authored material is licensed under the MIT License.
 
-Historical W3C Wine/Food material is external reference material and is **not redistributed in this bootstrap**. Its source, attribution and licensing boundary are documented in `NOTICE.md` and `source/README.md`. Any future cache or preserved representation must record the applicable W3C licensing terms before source bytes are committed.
+Historical W3C Wine/Food material is external reference material and is **not redistributed**. Any future cached/preserved source copy must record the applicable W3C licensing terms before source bytes are committed and must remain a representation rather than replacement semantic identity.
 
-## Governance
+## Governance and visibility
 
-Repository-local work is tracked in [issue #1](https://github.com/GerhardBalz/semantic-modeling-wine-food/issues/1). Reusable findings should flow upward rather than being silently generalized:
+Repository-local semantic evidence belongs here; reusable findings flow to SKE/SMO through standards-first review.
 
-- cross-repository engineering/governance → SKE;
-- reusable semantic-modeling vocabulary → SMO;
-- domain-specific Wine/Food evidence → this repository.
+SKE #29 owns the public-visibility decision for this repository and its Pizza sibling. Public visibility would not imply W3C endorsement, authority over historical namespaces, or standardization of local example vocabulary.
