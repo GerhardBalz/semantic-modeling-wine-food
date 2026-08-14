@@ -2,7 +2,7 @@
 
 A Semantic Knowledge Engineering (SKE) reference example for applying the Semantic Modeling Ontology (SMO) to the classic W3C OWL Wine and Food teaching domain.
 
-> **Status:** Public-readiness baseline complete. Repository visibility is governed through SKE #29; visibility is a publication/governance decision, not a measure of semantic maturity.
+> **Status:** Public reference baseline complete. The repository is public following the completed SKE #29 publication decision; public visibility is a publication/governance state, not a measure of semantic maturity.
 
 ## Role in SKE
 
@@ -85,6 +85,7 @@ No new SMO competency-question term was introduced.
 .
 ├── .github/workflows/validate.yml
 ├── README.md
+├── CONTRIBUTING.md
 ├── LICENSE
 ├── NOTICE.md
 ├── requirements-dev.txt
@@ -134,4 +135,8 @@ Historical W3C Wine/Food material is external reference material and is **not re
 
 Repository-local semantic evidence belongs here; reusable findings flow to SKE/SMO through standards-first review.
 
-SKE #29 owns the public-visibility decision for this repository and its Pizza sibling. Public visibility would not imply W3C endorsement, authority over historical namespaces, or standardization of local example vocabulary.
+SKE #29 completed the public-visibility decision for this repository and its Pizza sibling. Public visibility does not imply W3C endorsement, authority over historical namespaces, or standardization of local example vocabulary.
+
+## Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the branch, validation, and pull-request workflow.
